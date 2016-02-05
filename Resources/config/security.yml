@@ -1,0 +1,17 @@
+parameters:
+    amf_webservices_security.security.authentication.listener.class: AMF\WebServicesSecurityBundle\Security\Firewall\WsseListener
+    amf_webservices_security.security.authentication.provider.class: AMF\WebServicesSecurityBundle\Security\Authentication\Provider\WsseAuthenticationProvider
+    amf_webservices_security.security.encoder.class: AMF\WebServicesSecurityBundle\Security\Encoder\WssePasswordEncoder
+      
+services:   
+    amf_webservices_security.security.authentication.listener:
+        class: "%amf_webservices_security.security.authentication.listener.class%"
+        arguments: ["@security.context", "@security.authentication.manager", ""]
+        
+    amf_webservices_security.security.authentication.provider:
+        class: "%amf_webservices_security.security.authentication.provider.class%"
+        arguments: ["", "@filesystem", "", "", "", "%kernel.cache_dir%/security/nonces"]
+        
+    amf_webservices_security.security.encoder:
+        class: %amf_webservices_security.security.encoder.class%
+        arguments: ["", ""]
